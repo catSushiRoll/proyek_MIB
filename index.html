@@ -33,6 +33,10 @@
     <button class="nav-item" onclick="showPage('hr', this)">
         <span class="nav-dot"></span> Human Resources
     </button>
+
+    <button class="nav-item" onclick="showPage('readmission', this)">
+        <span class="nav-dot"></span> Readmission Rate
+    </button>
     <div class="sidebar-footer">Periode: Jun 2025</div>
 </aside>
 
@@ -322,7 +326,7 @@
             <div class="page-title">Sumber Daya Manusia</div>
             <div class="page-desc">Distribusi beban kerja staf medis berdasarkan jumlah pasien yang ditangani.</div>
         </div>
-    
+
         <div class="chart-grid">
             <div class="chart-card full">
                 <div class="chart-title">Jumlah Pasien per Staf Medis</div>
@@ -332,6 +336,118 @@
         </div>
     </div>
 
+    <!-- ========== PAGE: Clinical ========== -->
+    <!-- ========== PAGE: READMISSION ========== -->
+    <div class="page" id="page-readmission">
+        <div class="page-header">
+            <div class="page-tag">KPI Klinis</div>
+            <div class="page-title">Readmission Rate</div>
+            <div class="page-desc">Pantau pasien yang kembali dalam 30 hari setelah kunjungan pertama.</div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="kpi-grid" style="grid-template-columns: repeat(3,1fr);">
+            <div class="kpi-card blue">
+                <div class="kpi-label">Total Kunjungan</div>
+                <div class="kpi-value" id="ra-totalVisits">0</div>
+                <div class="kpi-sub">Semua data tercatat</div>
+            </div>
+            <div class="kpi-card red">
+                <div class="kpi-label">Readmission Rate</div>
+                <div class="kpi-value" id="ra-rate">0%</div>
+                <div class="kpi-sub"><span class="kpi-badge badge-warn">Target &lt;5%</span> dalam 30 hari</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-label">Pasien Readmit</div>
+                <div class="kpi-value" id="ra-readmitCount">0</div>
+                <div class="kpi-sub">Kembali dalam 30 hari</div>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="chart-card" style="margin-bottom:24px;">
+            <div class="chart-title">Tambah Data Kunjungan Pasien</div>
+            <div class="chart-subtitle">Isi form berikut untuk merekam kunjungan baru</div>
+            <hr class="section-divider">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>ID / No. Rekam Medis</label>
+                    <input type="text" id="ra-patientId" placeholder="cth. RM-00123">
+                </div>
+                <div class="form-group">
+                    <label>Nama Pasien</label>
+                    <input type="text" id="ra-patientName" placeholder="Nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Kunjungan</label>
+                    <input type="date" id="ra-visitDate">
+                </div>
+                <div class="form-group">
+                    <label>Poli / Unit</label>
+                    <select id="ra-poli">
+                        <option value="">-- Pilih Poli --</option>
+                        <option>Poli Dalam</option>
+                        <option>Poli Anak</option>
+                        <option>Poli Kandungan</option>
+                        <option>Poli Gigi</option>
+                        <option>Poli Mata</option>
+                        <option>IGD</option>
+                        <option>Rawat Inap</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Diagnosis</label>
+                    <input type="text" id="ra-diagnosis" placeholder="cth. Hipertensi">
+                </div>
+                <div class="form-group" style="justify-content:flex-end;">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary" onclick="addVisit()">+ Tambah Kunjungan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHART TREN -->
+        <div class="chart-grid" style="grid-template-columns:1fr;">
+            <div class="chart-card">
+                <div class="chart-title">Tren Readmission per Bulan</div>
+                <div class="chart-subtitle">Jumlah pasien readmit (kembali dalam 30 hari) per bulan</div>
+                <div class="chart-wrap"><canvas id="ra-trendChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-card">
+            <div class="table-header">
+                <div>
+                    <div class="chart-title">Daftar Kunjungan Pasien</div>
+                    <div class="chart-subtitle" style="margin:0">Sistem mendeteksi otomatis readmission dalam 30 hari</div>
+                </div>
+                <button class="btn btn-danger" onclick="clearAllVisits()">Hapus Semua Data</button>
+            </div>
+            <hr class="section-divider">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No. RM</th>
+                        <th>Nama Pasien</th>
+                        <th>Tanggal Kunjungan</th>
+                        <th>Poli / Unit</th>
+                        <th>Diagnosis</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="ra-tableBody">
+                    <tr><td colspan="7">
+                        <div class="empty-state">
+                            <div class="empty-icon">🏥</div>
+                            Belum ada data kunjungan. Tambahkan melalui form di atas.
+                        </div>
+                    </td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </main>
 
 <script src="script.js"></script>
