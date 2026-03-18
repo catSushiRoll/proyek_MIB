@@ -651,18 +651,105 @@ function refreshAllPages(){
 // ══════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded',()=>{
-    document.getElementById('admissionDate')?.addEventListener('change',calcLOS);
-    document.getElementById('dischargeDate')?.addEventListener('change',calcLOS);
-    document.getElementById('registrationTime')?.addEventListener('change',calcWait);
-    document.getElementById('callTime')?.addEventListener('change',calcWait);
-    const raDate=document.getElementById('ra-visitDate');
-    if(raDate)raDate.valueAsDate=new Date();
-    renderHomePage();
-    renderServicePage();
-    renderFinancePage();
-    renderEfficiencyPage();
-    renderReadmissionPage();
-    renderHRPage();
-    renderHistory();
-});
+// document.addEventListener('DOMContentLoaded',()=>{
+//     document.getElementById('admissionDate')?.addEventListener('change',calcLOS);
+//     document.getElementById('dischargeDate')?.addEventListener('change',calcLOS);
+//     document.getElementById('registrationTime')?.addEventListener('change',calcWait);
+//     document.getElementById('callTime')?.addEventListener('change',calcWait);
+//     const raDate=document.getElementById('ra-visitDate');
+//     if(raDate)raDate.valueAsDate=new Date();
+//     renderHomePage();
+//     renderServicePage();
+//     renderFinancePage();
+//     renderEfficiencyPage();
+//     renderReadmissionPage();
+//     renderHRPage();
+//     renderHistory();
+// });
+
+// ══════════════════════════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════════════════════════
+let isAdmin = false;
+
+function setAdminUI(admin) {
+  isAdmin = admin;
+
+  document.querySelectorAll('.nav-item.admin-only').forEach(btn => {
+    if (admin) {
+      btn.classList.add('admin-visible');
+      btn.style.display = '';        // clear any leftover inline style
+    } else {
+      btn.classList.remove('admin-visible');
+      btn.style.display = 'none';
+    }
+  });
+
+  document.getElementById('loginBtn').style.display = admin ? 'none' : '';
+  document.getElementById('logoutBtn').style.display = admin ? '' : 'none';
+
+  if (!admin) {
+    const restrictedPages = ['page-service','page-finance','page-hr','page-readmission','page-efficiency','page-input'];
+    const onRestricted = restrictedPages.some(id => {
+      const el = document.getElementById(id);
+      return el && el.classList.contains('active');
+    });
+    if (onRestricted) {
+      showPage('home', document.querySelector('.nav-item'));
+    }
+  }
+}
+
+function showLoginOverlay() {
+  document.getElementById('loginOverlay').style.display = 'flex';
+}
+
+async function submitLogin() {
+  const username = document.getElementById('loginUsername').value;
+  const password = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  try {
+    const res = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ username, password })
+    });
+    if (res.ok) {
+      document.getElementById('loginOverlay').style.display = 'none';
+      errEl.style.display = 'none';
+      setAdminUI(true);
+    } else {
+      errEl.style.display = 'block';
+    }
+  } catch (err) {
+    errEl.textContent = 'Tidak dapat terhubung ke server.';
+    errEl.style.display = 'block';
+  }
+}
+
+async function doLogout() {
+  await fetch('http://localhost:3000/logout', { method: 'POST', credentials: 'include' });
+  setAdminUI(false);
+}
+
+// Check session on page load
+async function checkSession() {
+  try {
+    const res = await fetch('http://localhost:3000/me', { credentials: 'include' });
+    const data = await res.json();
+    setAdminUI(data.isAdmin);
+  } catch {
+    setAdminUI(false);
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+renderHomePage();
+renderServicePage();
+renderFinancePage();
+renderEfficiencyPage();
+renderHistory();
+syncFromMongoDB();
+setInterval(syncFromMongoDB, 30000);
+checkSession();   // ← check if already logged in on page load
