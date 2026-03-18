@@ -97,12 +97,15 @@ body {
 }
 
 /* MAIN CONTENT */
-.main {
+/* .main {
     margin-left: 240px;
     flex: 1;
     padding: 40px 36px;
     min-height: 100vh;
-}
+} */
+
+.main { margin-left: 240px; flex: 1; padding: 40px 36px; min-height: 100vh; display: none; }
+.main.visible { display: block; }
 
 /* PAGE HEADER */
 .page-header { margin-bottom: 32px; }
