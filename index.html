@@ -12,58 +12,199 @@
 </head>
 <body>
 
-<!-- LOGIN OVERLAY -->
-<div id="loginOverlay" style="display:none; position:fixed; inset:0; background:rgba(26,31,46,0.85); z-index:999; align-items:center; justify-content:center;">
-  <div style="background:#fff; border-radius:16px; padding:40px; width:360px; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-    <div style="font-family:'Playfair Display',serif; font-size:22px; margin-bottom:4px;">Med<span style="color:#4F7EF7">Core</span></div>
-    <div style="font-size:12px; color:#8A909E; margin-bottom:28px; text-transform:uppercase; letter-spacing:1.5px;">Admin Login</div>
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <input id="loginUsername" type="text" placeholder="Username" style="border:1px solid #E8E6E0; border-radius:8px; padding:10px 14px; font-size:13px; font-family:'DM Sans',sans-serif; outline:none;" />
-      <input id="loginPassword" type="password" placeholder="Password" style="border:1px solid #E8E6E0; border-radius:8px; padding:10px 14px; font-size:13px; font-family:'DM Sans',sans-serif; outline:none;" />
-      <div id="loginError" style="color:#DC2626; font-size:12px; display:none;">Username atau password salah.</div>
-      <button onclick="submitLogin()" style="background:#4F7EF7; color:#fff; border:none; border-radius:10px; padding:12px; font-size:14px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif;">Masuk</button>
+<!-- ========== LOGIN PAGE ========== -->
+<div id="loginPage" class="login-page">
+
+  <!-- LEFT: Form Panel -->
+  <div class="login-panel-left">
+    <div class="login-logo">Med<span>Core</span></div>
+    <div class="login-subtitle">RSUD Harapan Sehat</div>
+
+    <div class="login-heading">Selamat Datang</div>
+    <div class="login-heading-sub">Masuk untuk mengakses dashboard KPI</div>
+
+    <div class="login-field">
+      <label>Username</label>
+      <div class="login-input-wrap">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <input id="loginUsername" type="text" class="login-input" placeholder="Masukkan username"
+               onkeydown="if(event.key==='Enter') submitLogin()" />
+      </div>
+    </div>
+
+    <div class="login-field">
+      <label>Password</label>
+      <div class="login-input-wrap">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+        <input id="loginPassword" type="password" class="login-input" placeholder="Masukkan password"
+               onkeydown="if(event.key==='Enter') submitLogin()" />
+      </div>
+    </div>
+
+    <div id="loginError" style="color:#DC2626; font-size:12px; display:none; margin-bottom:8px;">
+      ⚠️ Username atau password salah.
+    </div>
+
+    <button onclick="submitLogin()" class="login-btn">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+      </svg>
+      Masuk ke Dashboard
+    </button>
+
+    <div style="margin-top:auto; padding-top:40px; font-size:11px; color:var(--muted);">
+      RSUD Harapan Sehat © 2025 &nbsp;·&nbsp; MedCore v2.0
     </div>
   </div>
+
+  <!-- RIGHT: Visual Panel -->
+  <div class="login-panel-right">
+    <div class="login-grid-overlay"></div>
+    <div class="login-blob login-blob-1"></div>
+    <div class="login-blob login-blob-2"></div>
+    <div class="login-blob login-blob-3"></div>
+    <div class="login-blob login-blob-4"></div>
+
+    <!-- Floating KPI icon cards -->
+    <div class="login-float-card login-float-1">
+      <div class="login-float-icon" style="background:rgba(79,126,247,0.2);color:#7aaeff;">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <div class="login-float-label">KPI Analytics</div>
+    </div>
+
+    <div class="login-float-card login-float-2">
+      <div class="login-float-icon" style="background:rgba(52,201,143,0.2);color:#5de8b0;">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+        </svg>
+      </div>
+      <div class="login-float-label">Klinis & Pasien</div>
+    </div>
+
+    <div class="login-float-card login-float-3">
+      <div class="login-float-icon" style="background:rgba(251,191,36,0.2);color:#fcd56a;">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      </div>
+      <div class="login-float-label">Keuangan</div>
+    </div>
+
+    <div class="login-float-card login-float-4">
+      <div class="login-float-icon" style="background:rgba(167,139,245,0.2);color:#c4aeff;">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+      </div>
+      <div class="login-float-label">Sumber Daya Manusia</div>
+    </div>
+
+    <!-- Welcome text -->
+    <div class="login-welcome">
+      <div class="login-welcome-title">Dashboard<br>KPI Rumah<br>Sakit.</div>
+      <div class="login-welcome-sub">Pantau performa klinis, keuangan, dan operasional fasilitas kesehatan secara real-time.</div>
+    </div>
+  </div>
+
 </div>
-    
+
+<!-- ========== DASHBOARD APP ========== -->
+<div id="dashboardApp" style="display:none;">
+
 <!-- SIDEBAR -->
-<aside class="sidebar">
-    <div class="sidebar-logo">Med<span>Core</span></div>
-    <div class="sidebar-subtitle">RSUD Harapan Sehat</div>
+<aside class="sidebar" id="sidebar">
 
-    <div class="nav-label">Menu</div>
-    <button class="nav-item admin-only" onclick="showPage('home', this)">
-        <span class="nav-dot"></span> Beranda / Overview
+    <!-- Toggle button -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="Toggle Sidebar">
+        <svg class="toggle-icon-open" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7M18 19l-7-7 7-7"/>
+        </svg>
+        <svg class="toggle-icon-closed" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M6 5l7 7-7 7"/>
+        </svg>
     </button>
 
-    <button class="nav-item admin-only" onclick="showPage('service', this)">
-        <span class="nav-dot"></span> Kualitas Layanan
+    <!-- Logo area -->
+    <div class="sidebar-brand">
+        <div class="sidebar-logo">Med<span>Core</span></div>
+        <div class="sidebar-subtitle">RSUD Harapan Sehat</div>
+    </div>
+
+    <div class="nav-label sidebar-text">Menu</div>
+
+    <button class="nav-item" onclick="showPage('home', this)" data-tooltip="Beranda / Overview">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+        </span>
+        <span class="nav-text">Beranda / Overview</span>
     </button>
-    
-    <button class="nav-item admin-only" onclick="showPage('finance', this)">
-        <span class="nav-dot"></span> Keuangan
+    <button class="nav-item" onclick="showPage('service', this)" data-tooltip="Kualitas Layanan">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+        </span>
+        <span class="nav-text">Kualitas Layanan</span>
+    </button>
+    <button class="nav-item" onclick="showPage('finance', this)" data-tooltip="Keuangan">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </span>
+        <span class="nav-text">Keuangan</span>
+    </button>
+    <button class="nav-item" onclick="showPage('hr', this)" data-tooltip="Human Resources">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+        </span>
+        <span class="nav-text">Human Resources</span>
+    </button>
+    <button class="nav-item" onclick="showPage('readmission', this)" data-tooltip="Readmission Rate">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+        </span>
+        <span class="nav-text">Readmission Rate</span>
+    </button>
+    <button class="nav-item" onclick="showPage('efficiency', this)" data-tooltip="Efisiensi Operasional">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+        </span>
+        <span class="nav-text">Efisiensi Operasional</span>
+    </button>
+    <button class="nav-item" onclick="showPage('input', this)" data-tooltip="Input Data">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+        </span>
+        <span class="nav-text">Input Data</span>
+    </button>
+    <button class="nav-item" id="logoutBtn" onclick="doLogout()" data-tooltip="Logout">
+        <span class="nav-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+            </svg>
+        </span>
+        <span class="nav-text">Logout</span>
     </button>
 
-    <button class="nav-item admin-only" onclick="showPage('hr', this)">
-        <span class="nav-dot"></span> Human Resources
-    </button>
-
-    <button class="nav-item admin-only" onclick="showPage('readmission', this)">
-        <span class="nav-dot"></span> Readmission Rate
-    </button>
-
-    <button class="nav-item admin-only" onclick="showPage('efficiency', this)">
-        <span class="nav-dot"></span> Efisiensi Operasional
-    </button>
-
-    <button class="nav-item admin-only" onclick="showPage('input', this)">
-        <span class="nav-dot"></span> Input Data
-    </button>
-
-    <button class="nav-item" id="loginBtn" onclick="showLoginOverlay()"><span class="nav-dot"></span> Login Admin</button>
-    <button class="nav-item" id="logoutBtn" style="display:none;" onclick="doLogout()"><span class="nav-dot"></span> Logout</button>
-
-    <div class="sidebar-footer">RSUD Harapan Sehat © 2025</div>
+    <div class="sidebar-footer sidebar-text">RSUD Harapan Sehat © 2025</div>
 </aside>
 
 <!-- MAIN CONTENT -->
@@ -76,18 +217,16 @@
             <div class="page-title">Dashboard Fasilitas Kesehatan</div>
             <div class="page-desc">Ringkasan performa manajemen &amp; klinis — semua KPI utama dalam satu tampilan.</div>
         </div>
-
-        <!-- KPI CARDS -->
         <div class="kpi-grid">
             <div class="kpi-card blue">
                 <div class="kpi-label">Total Pendapatan</div>
-                <div class="kpi-value">Rp 1,2 M</div>
-                <div class="kpi-sub"><span class="kpi-badge badge-up">+12%</span> dari bulan lalu</div>
+                <div class="kpi-value" id="home-revenue">Rp 1,2 M</div>
+                <div class="kpi-sub" id="home-revenue-sub"><span class="kpi-badge badge-up">Kumulatif</span> Jan–Jun 2025</div>
             </div>
             <div class="kpi-card green">
                 <div class="kpi-label">Bed Occupancy Rate</div>
-                <div class="kpi-value">78%</div>
-                <div class="kpi-sub">Kapasitas Rawat Inap</div>
+                <div class="kpi-value" id="home-bor">78%</div>
+                <div class="kpi-sub" id="home-bor-sub">Kapasitas Rawat Inap Jun 2025</div>
             </div>
             <div class="kpi-card red">
                 <div class="kpi-label">Readmission Rate</div>
@@ -96,12 +235,10 @@
             </div>
             <div class="kpi-card purple">
                 <div class="kpi-label">Patient Satisfaction</div>
-                <div class="kpi-value">4,5/5</div>
-                <div class="kpi-sub">Berdasarkan survei terakhir</div>
+                <div class="kpi-value" id="home-satisfaction">4,5/5</div>
+                <div class="kpi-sub" id="home-satisfaction-sub">Berdasarkan survei terakhir</div>
             </div>
         </div>
-
-        <!-- CHARTS -->
         <div class="chart-grid">
             <div class="chart-card">
                 <div class="chart-title">Distribusi Pemasukan</div>
@@ -133,19 +270,26 @@
             <div class="page-title">Kepuasan &amp; Keterjangkauan Pasien</div>
             <div class="page-desc">Analisis mendalam kepuasan pasien, pasien baru, dan waktu tunggu per poli.</div>
         </div>
-
-        <!-- INSIGHT -->
         <div class="insight-card">
             <div class="insight-label">Analisis Periode Jun 2025</div>
-            <div class="insight-text">
-                Secara keseluruhan, kualitas layanan menunjukkan tren positif. 
-                Skor kepuasan pasien mencapai <strong style="color:#fff">4,5 dari 5</strong>, meningkat 0,3 poin dibanding kuartal sebelumnya. 
-                Pertumbuhan pasien baru mencapai puncaknya pada bulan Juni dengan <strong style="color:#fff">700 pasien</strong>, didorong oleh kampanye outreach komunitas. 
-                Namun, waktu tunggu di Poli Kandungan masih berada di angka <strong style="color:#fff">45 menit</strong>, jauh di atas rata-rata fasilitas sejenis, dan perlu menjadi prioritas perbaikan operasional pada kuartal berikutnya.
-            </div>
+            <div class="insight-text" id="svc-insight-text">Memuat analisis...</div>
         </div>
-
-        <!-- CHARTS -->
+        <div class="filter-bar">
+            <label>Filter:</label>
+            <select class="filter-select" id="svc-filter-month" onchange="renderServicePage()">
+                <option value="all">Semua Bulan</option>
+                <option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option>
+                <option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option>
+            </select>
+            <div class="filter-divider"></div>
+            <select class="filter-select" id="svc-filter-poli" onchange="renderServicePage()">
+                <option value="all">Semua Poli</option>
+                <option>Poli Gigi</option><option>Poli Anak</option><option>Poli Kandungan</option>
+                <option>Poli Dalam</option><option>Poli Mata</option>
+            </select>
+            <div class="filter-divider"></div>
+            <span class="filter-badge" id="svc-data-badge">● Baseline saja</span>
+        </div>
         <div class="chart-grid">
             <div class="chart-card">
                 <div class="chart-title">Skor Kepuasan Pasien per Bulan</div>
@@ -163,95 +307,17 @@
                 <div class="chart-wrap"><canvas id="s-waitChart"></canvas></div>
             </div>
         </div>
-
-        <!-- TABLE: Satisfaction -->
         <div class="table-card">
-            <div class="table-header">
-                <div>
-                    <div class="chart-title">Data Kepuasan Pasien</div>
-                    <div class="chart-subtitle" style="margin:0">Sumber: Survei Exit Pasien, Jan–Jun 2025</div>
-                </div>
-            </div>
+            <div class="table-header"><div><div class="chart-title">Data Kepuasan Pasien</div><div class="chart-subtitle" style="margin:0">Sumber: Survei Exit Pasien, Jan–Jun 2025</div></div></div>
             <hr class="section-divider">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Bulan</th>
-                        <th>Responden</th>
-                        <th>Skor Rata-rata</th>
-                        <th>Puas (%)</th>
-                        <th>Tidak Puas (%)</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Januari</td><td>312</td><td>4,1</td><td>82%</td><td>18%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Baik</span></td></tr>
-                    <tr><td>Februari</td><td>289</td><td>4,0</td><td>79%</td><td>21%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Baik</span></td></tr>
-                    <tr><td>Maret</td><td>401</td><td>4,2</td><td>84%</td><td>16%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Baik</span></td></tr>
-                    <tr><td>April</td><td>375</td><td>4,3</td><td>86%</td><td>14%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Baik</span></td></tr>
-                    <tr><td>Mei</td><td>450</td><td>4,4</td><td>88%</td><td>12%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Baik</span></td></tr>
-                    <tr><td>Juni</td><td>520</td><td>4,5</td><td>90%</td><td>10%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Sangat Baik</span></td></tr>
-                </tbody>
-            </table>
+            <table><thead><tr><th>Bulan</th><th>Responden</th><th>Skor Rata-rata</th><th>Puas (%)</th><th>Sumber</th><th>Status</th></tr></thead>
+            <tbody id="svc-satisfaction-tbody"></tbody></table>
         </div>
-
-        <!-- TABLE: New Patients -->
         <div class="table-card">
-            <div class="table-header">
-                <div>
-                    <div class="chart-title">Data Pasien Baru</div>
-                    <div class="chart-subtitle" style="margin:0">Sumber: Sistem Rekam Medis, Jan–Jun 2025</div>
-                </div>
-            </div>
+            <div class="table-header"><div><div class="chart-title">Data Waktu Tunggu per Poli</div><div class="chart-subtitle" style="margin:0">Rata-rata — Target: &lt;30 menit</div></div></div>
             <hr class="section-divider">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Bulan</th>
-                        <th>Pasien Baru</th>
-                        <th>Pasien Lama</th>
-                        <th>Total Kunjungan</th>
-                        <th>Pertumbuhan MoM</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Januari</td><td>400</td><td>1.200</td><td>1.600</td><td>—</td></tr>
-                    <tr><td>Februari</td><td>300</td><td>1.100</td><td>1.400</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">-25%</span></td></tr>
-                    <tr><td>Maret</td><td>550</td><td>1.300</td><td>1.850</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">+83%</span></td></tr>
-                    <tr><td>April</td><td>450</td><td>1.250</td><td>1.700</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">-18%</span></td></tr>
-                    <tr><td>Mei</td><td>600</td><td>1.400</td><td>2.000</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">+33%</span></td></tr>
-                    <tr><td>Juni</td><td>700</td><td>1.500</td><td>2.200</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">+17%</span></td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- TABLE: Wait Times -->
-        <div class="table-card">
-            <div class="table-header">
-                <div>
-                    <div class="chart-title">Data Waktu Tunggu per Poli</div>
-                    <div class="chart-subtitle" style="margin:0">Rata-rata Juni 2025 — Target: &lt;30 menit</div>
-                </div>
-            </div>
-            <hr class="section-divider">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Poli</th>
-                        <th>Waktu Tunggu (Menit)</th>
-                        <th>Hari Tersibuk</th>
-                        <th>Jumlah Dokter</th>
-                        <th>Status vs Target</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Poli Gigi</td><td>15</td><td>Senin</td><td>3</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
-                    <tr><td>Poli Anak</td><td>25</td><td>Rabu</td><td>4</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
-                    <tr><td>Poli Kandungan</td><td>45</td><td>Selasa</td><td>2</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">Melebihi Target</span></td></tr>
-                    <tr><td>Poli Dalam</td><td>30</td><td>Kamis</td><td>5</td><td><span class="td-pill" style="background:#FFFBEB;color:#D97706">Batas Target</span></td></tr>
-                    <tr><td>Poli Mata</td><td>20</td><td>Jumat</td><td>2</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
-                </tbody>
-            </table>
+            <table><thead><tr><th>Poli</th><th>Waktu Tunggu</th><th>Sumber</th><th>Status vs Target</th></tr></thead>
+            <tbody id="svc-wait-tbody"></tbody></table>
         </div>
     </div>
 
@@ -262,20 +328,29 @@
             <div class="page-title">Pendapatan &amp; Distribusi Keuangan</div>
             <div class="page-desc">Analisis distribusi pemasukan dan tren pendapatan bulanan fasilitas.</div>
         </div>
-
-        <!-- INSIGHT -->
         <div class="insight-card">
             <div class="insight-label">Analisis Keuangan — Jun 2025</div>
-            <div class="insight-text">
-                Total pendapatan semester pertama mencapai <strong style="color:#fff">Rp 7,2 Miliar</strong>, tumbuh rata-rata <strong style="color:#fff">12% per bulan</strong>. Unit Rawat Inap menjadi kontributor terbesar dengan porsi <strong style="color:#fff">36%</strong> dari total pemasukan, diikuti Rawat Jalan sebesar 29%. Penurunan signifikan terjadi pada bulan Februari akibat libur panjang nasional, namun segera terpulihkan pada Maret. Pendapatan dari layanan farmasi menunjukkan pertumbuhan konsisten seiring peningkatan volume kunjungan, dan diproyeksikan melampaui target tahunan jika tren ini berlanjut.
-            </div>
+            <div class="insight-text" id="fin-insight-text">Memuat analisis...</div>
         </div>
-
-        <!-- CHARTS -->
+        <div class="filter-bar">
+            <label>Filter:</label>
+            <select class="filter-select" id="fin-filter-month" onchange="renderFinancePage()">
+                <option value="all">Semua Bulan</option>
+                <option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option>
+                <option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option>
+            </select>
+            <div class="filter-divider"></div>
+            <select class="filter-select" id="fin-filter-unit" onchange="renderFinancePage()">
+                <option value="all">Semua Unit</option>
+                <option>Rawat Jalan</option><option>Rawat Inap</option><option>Farmasi</option><option>Loket &amp; Lain</option>
+            </select>
+            <div class="filter-divider"></div>
+            <span class="filter-badge" id="fin-data-badge">● Baseline saja</span>
+        </div>
         <div class="chart-grid">
             <div class="chart-card">
                 <div class="chart-title">Distribusi Pemasukan</div>
-                <div class="chart-subtitle">Porsi pendapatan per unit layanan — Jun 2025</div>
+                <div class="chart-subtitle">Porsi pendapatan per unit layanan</div>
                 <div class="chart-wrap"><canvas id="f-pieChart"></canvas></div>
             </div>
             <div class="chart-card">
@@ -284,67 +359,17 @@
                 <div class="chart-wrap"><canvas id="f-revenueChart"></canvas></div>
             </div>
         </div>
-
-        <!-- TABLE: Income Distribution -->
         <div class="table-card">
-            <div class="table-header">
-                <div>
-                    <div class="chart-title">Detail Distribusi Pemasukan</div>
-                    <div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan Internal, Jun 2025</div>
-                </div>
-            </div>
+            <div class="table-header"><div><div class="chart-title">Detail Distribusi Pemasukan</div><div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan Internal</div></div></div>
             <hr class="section-divider">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Unit Layanan</th>
-                        <th>Pendapatan (Juta)</th>
-                        <th>Porsi (%)</th>
-                        <th>Target Bulanan</th>
-                        <th>Pencapaian Target</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Rawat Jalan</td><td>Rp 350</td><td>29%</td><td>Rp 320</td><td>109%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
-                    <tr><td>Rawat Inap</td><td>Rp 432</td><td>36%</td><td>Rp 400</td><td>108%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
-                    <tr><td>Farmasi / Obat</td><td>Rp 264</td><td>22%</td><td>Rp 250</td><td>106%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
-                    <tr><td>Layanan Loket &amp; Lain</td><td>Rp 154</td><td>13%</td><td>Rp 180</td><td>86%</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">Belum Tercapai</span></td></tr>
-                    <tr style="font-weight:600"><td>Total</td><td>Rp 1.200</td><td>100%</td><td>Rp 1.150</td><td>104%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
-                </tbody>
-            </table>
+            <table><thead><tr><th>Unit Layanan</th><th>Pendapatan (Juta)</th><th>Porsi (%)</th><th>Target Bulanan</th><th>Pencapaian Target</th><th>Status</th></tr></thead>
+            <tbody id="fin-dist-tbody"></tbody></table>
         </div>
-
-        <!-- TABLE: Monthly Revenue -->
         <div class="table-card">
-            <div class="table-header">
-                <div>
-                    <div class="chart-title">Pendapatan Bulanan — Jan s/d Jun 2025</div>
-                    <div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan, dalam Juta Rupiah</div>
-                </div>
-            </div>
+            <div class="table-header"><div><div class="chart-title">Pendapatan Bulanan — Jan s/d Jun 2025</div><div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan, dalam Juta Rupiah</div></div></div>
             <hr class="section-divider">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Bulan</th>
-                        <th>Rawat Jalan</th>
-                        <th>Rawat Inap</th>
-                        <th>Farmasi</th>
-                        <th>Loket &amp; Lain</th>
-                        <th>Total</th>
-                        <th>Pertumbuhan MoM</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Januari</td><td>280</td><td>350</td><td>190</td><td>120</td><td>940</td><td>—</td></tr>
-                    <tr><td>Februari</td><td>220</td><td>310</td><td>165</td><td>100</td><td>795</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">-15%</span></td></tr>
-                    <tr><td>Maret</td><td>310</td><td>390</td><td>210</td><td>130</td><td>1.040</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">+31%</span></td></tr>
-                    <tr><td>April</td><td>320</td><td>400</td><td>225</td><td>140</td><td>1.085</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">+4%</span></td></tr>
-                    <tr><td>Mei</td><td>335</td><td>415</td><td>248</td><td>152</td><td>1.150</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">+6%</span></td></tr>
-                    <tr><td>Juni</td><td>350</td><td>432</td><td>264</td><td>154</td><td>1.200</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">+4%</span></td></tr>
-                </tbody>
-            </table>
+            <table><thead><tr><th>Bulan</th><th>Rawat Jalan</th><th>Rawat Inap</th><th>Farmasi</th><th>Loket &amp; Lain</th><th>Total</th><th>Sumber</th></tr></thead>
+            <tbody id="fin-monthly-tbody"></tbody></table>
         </div>
     </div>
 
@@ -353,33 +378,48 @@
         <div class="page-header">
             <div class="page-tag">KPI Human Resources</div>
             <div class="page-title">Sumber Daya Manusia</div>
-            <div class="page-desc">Distribusi beban kerja staf medis berdasarkan jumlah pasien yang ditangani.</div>
+            <div class="page-desc">Distribusi beban kerja per unit layanan berdasarkan data Input Data.</div>
         </div>
-
         <div class="chart-grid">
             <div class="chart-card full">
-                <div class="chart-title">Jumlah Pasien per Staf Medis</div>
-                <div class="chart-subtitle">Rata-rata pasien yang ditangani per staf — Juni 2025</div>
+                <div class="chart-title">Jumlah Pasien per Unit Layanan</div>
+                <div class="chart-subtitle">Data diambil dari section Input Data — gabungan baseline + live</div>
                 <div class="chart-wrap"><canvas id="hr-staffPatientChart"></canvas></div>
             </div>
         </div>
+        <!-- Tabel Detail HR -->
+        <div class="table-card">
+            <div class="table-header"><div><div class="chart-title">Detail Beban Kerja per Unit</div><div class="chart-subtitle" style="margin:0">Rekap dari data Input Data: jumlah pasien, rata-rata LOS, dan kepuasan</div></div></div>
+            <hr class="section-divider">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Poli</th>
+                        <th>Jumlah Dokter</th>
+                        <th>Jumlah Pasien</th>
+                        <th>Proporsi Pasien</th>
+                        <th>Rasio Pasien/Dokter</th>
+                    </tr>
+                </thead>
+                <tbody id="hr-table-tbody">
+                    <tr><td colspan="5" style="text-align:center;color:var(--muted)">Memuat data…</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- ========== PAGE: Clinical ========== -->
     <!-- ========== PAGE: READMISSION ========== -->
     <div class="page" id="page-readmission">
         <div class="page-header">
             <div class="page-tag">KPI Klinis</div>
             <div class="page-title">Readmission Rate</div>
-            <div class="page-desc">Pantau pasien yang kembali dalam 30 hari setelah kunjungan pertama.</div>
+            <div class="page-desc">Data diambil otomatis dari section Input Data. Sistem mendeteksi readmission dalam 30 hari.</div>
         </div>
-
-        <!-- KPI CARDS -->
         <div class="kpi-grid" style="grid-template-columns: repeat(3,1fr);">
             <div class="kpi-card blue">
                 <div class="kpi-label">Total Kunjungan</div>
                 <div class="kpi-value" id="ra-totalVisits">0</div>
-                <div class="kpi-sub">Semua data tercatat</div>
+                <div class="kpi-sub">Semua data dari Input Data</div>
             </div>
             <div class="kpi-card red">
                 <div class="kpi-label">Readmission Rate</div>
@@ -392,50 +432,6 @@
                 <div class="kpi-sub">Kembali dalam 30 hari</div>
             </div>
         </div>
-
-        <!-- FORM -->
-        <div class="chart-card" style="margin-bottom:24px;">
-            <div class="chart-title">Tambah Data Kunjungan Pasien</div>
-            <div class="chart-subtitle">Isi form berikut untuk merekam kunjungan baru</div>
-            <hr class="section-divider">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>ID / No. Rekam Medis</label>
-                    <input type="text" id="ra-patientId" placeholder="cth. RM-00123">
-                </div>
-                <div class="form-group">
-                    <label>Nama Pasien</label>
-                    <input type="text" id="ra-patientName" placeholder="Nama lengkap">
-                </div>
-                <div class="form-group">
-                    <label>Tanggal Kunjungan</label>
-                    <input type="date" id="ra-visitDate">
-                </div>
-                <div class="form-group">
-                    <label>Poli / Unit</label>
-                    <select id="ra-poli">
-                        <option value="">-- Pilih Poli --</option>
-                        <option>Poli Dalam</option>
-                        <option>Poli Anak</option>
-                        <option>Poli Kandungan</option>
-                        <option>Poli Gigi</option>
-                        <option>Poli Mata</option>
-                        <option>IGD</option>
-                        <option>Rawat Inap</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Diagnosis</label>
-                    <input type="text" id="ra-diagnosis" placeholder="cth. Hipertensi">
-                </div>
-                <div class="form-group" style="justify-content:flex-end;">
-                    <label>&nbsp;</label>
-                    <button class="btn btn-primary" onclick="addVisit()">+ Tambah Kunjungan</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- CHART TREN -->
         <div class="chart-grid" style="grid-template-columns:1fr;">
             <div class="chart-card">
                 <div class="chart-title">Tren Readmission per Bulan</div>
@@ -443,34 +439,26 @@
                 <div class="chart-wrap"><canvas id="ra-trendChart"></canvas></div>
             </div>
         </div>
-
-        <!-- TABLE -->
         <div class="table-card">
             <div class="table-header">
                 <div>
                     <div class="chart-title">Daftar Kunjungan Pasien</div>
-                    <div class="chart-subtitle" style="margin:0">Sistem mendeteksi otomatis readmission dalam 30 hari</div>
+                    <div class="chart-subtitle" style="margin:0">Sistem mendeteksi otomatis readmission dalam 30 hari — sumber: Input Data</div>
                 </div>
-                <button class="btn btn-danger" onclick="clearAllVisits()">Hapus Semua Data</button>
             </div>
             <hr class="section-divider">
             <table>
                 <thead>
                     <tr>
-                        <th>No. RM</th>
-                        <th>Nama Pasien</th>
-                        <th>Tanggal Kunjungan</th>
-                        <th>Poli / Unit</th>
-                        <th>Diagnosis</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th>No. RM</th><th>Nama Pasien</th><th>Tanggal Kunjungan</th>
+                        <th>Poli / Unit</th><th>Diagnosis</th><th>Status</th>
                     </tr>
                 </thead>
                 <tbody id="ra-tableBody">
-                    <tr><td colspan="7">
+                    <tr><td colspan="6">
                         <div class="empty-state">
                             <div class="empty-icon">🏥</div>
-                            Belum ada data kunjungan. Tambahkan melalui form di atas.
+                            Belum ada data kunjungan. Tambahkan data melalui section Input Data.
                         </div>
                     </td></tr>
                 </tbody>
@@ -478,17 +466,13 @@
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════
-                EFISIENSI OPERASIONAL
-    ════════════════════════════════════════ -->
+    <!-- ========== PAGE: EFISIENSI OPERASIONAL ========== -->
     <div class="page" id="page-efficiency">
         <div class="page-header">
             <div class="page-tag">KPI Efisiensi Operasional</div>
             <div class="page-title">Bed Occupancy &amp; Length of Stay</div>
             <div class="page-desc">Analisis utilisasi tempat tidur dan durasi rawat inap per bangsal.</div>
         </div>
-    
-        <!-- Filter -->
         <div class="filter-bar">
             <label>Filter:</label>
             <select class="filter-select" id="eff-filter-month" onchange="renderEfficiencyPage()">
@@ -509,48 +493,43 @@
             <div class="filter-divider"></div>
             <span class="filter-badge" id="eff-data-badge">● Live + Baseline</span>
         </div>
-
-            <div class="kpi-grid">
-                <div class="kpi-card green"><div class="kpi-label">Bed Occupancy Rate (BOR)</div><div class="kpi-value" id="eff-bor">—%</div><div class="kpi-sub" id="eff-bor-sub">Memuat...</div></div>
-                <div class="kpi-card blue"><div class="kpi-label">Avg. Length of Stay (ALOS)</div><div class="kpi-value" id="eff-alos">— hari</div><div class="kpi-sub" id="eff-alos-sub">Memuat...</div></div>
-                <div class="kpi-card yellow"><div class="kpi-label">Total Pasien Rawat Inap</div><div class="kpi-value" id="eff-patients">—</div><div class="kpi-sub" id="eff-patients-sub">Memuat...</div></div>
-                <div class="kpi-card red"><div class="kpi-label">Turn Over Interval (TOI)</div><div class="kpi-value" id="eff-toi">— hari</div><div class="kpi-sub">Estimasi dari ALOS &amp; BOR</div></div>
-            </div>
-
-            <div class="insight-card">
-                <div class="insight-label">Analisis Efisiensi Operasional</div>
-                <div class="insight-text" id="eff-insight-text">Memuat analisis...</div>
-            </div>
-            <div class="chart-grid">
-                <div class="chart-card"><div class="chart-title">Tren BOR Bulanan</div><div class="chart-subtitle">Persentase hunian tempat tidur per bulan</div><div class="chart-wrap"><canvas id="e-borTrendChart"></canvas></div></div>
-                <div class="chart-card"><div class="chart-title">BOR per Bangsal</div><div class="chart-subtitle">Utilisasi per unit bangsal</div><div class="chart-wrap"><canvas id="e-borWardChart"></canvas></div></div>
-                <div class="chart-card"><div class="chart-title">Tren ALOS Bulanan</div><div class="chart-subtitle">Rata-rata durasi rawat inap (hari) per bulan</div><div class="chart-wrap"><canvas id="e-alosTrendChart"></canvas></div></div>
-                <div class="chart-card"><div class="chart-title">ALOS per Bangsal</div><div class="chart-subtitle">Rata-rata hari rawat inap vs target 4 hari</div><div class="chart-wrap"><canvas id="e-alosWardChart"></canvas></div></div>
-            </div>
-            <div class="table-card">
-                <div class="table-header"><div><div class="chart-title">Detail BOR per Bangsal</div><div class="chart-subtitle" style="margin:0">Kapasitas hardcode — Rentang ideal BOR: 75–85%</div></div></div>
-                <hr class="section-divider">
-                <table><thead><tr><th>Bangsal</th><th>Kapasitas TT</th><th>TT Terisi</th><th>BOR (%)</th><th>Sumber</th><th>Status</th></tr></thead>
-                <tbody id="eff-bor-tbody"></tbody></table>
-            </div>
-            <div class="table-card">
-                <div class="table-header"><div><div class="chart-title">Detail ALOS per Bangsal</div><div class="chart-subtitle" style="margin:0">Target ALOS: &lt;4 hari</div></div></div>
-                <hr class="section-divider">
-                <table><thead><tr><th>Bangsal</th><th>ALOS (Hari)</th><th>Pasien Keluar</th><th>Sumber</th><th>Status vs Target</th></tr></thead>
-                <tbody id="eff-alos-tbody"></tbody></table>
-            </div>
+        <div class="kpi-grid">
+            <div class="kpi-card green"><div class="kpi-label">Bed Occupancy Rate (BOR)</div><div class="kpi-value" id="eff-bor">—%</div><div class="kpi-sub" id="eff-bor-sub">Memuat...</div></div>
+            <div class="kpi-card blue"><div class="kpi-label">Avg. Length of Stay (ALOS)</div><div class="kpi-value" id="eff-alos">— hari</div><div class="kpi-sub" id="eff-alos-sub">Memuat...</div></div>
+            <div class="kpi-card yellow"><div class="kpi-label">Total Pasien Rawat Inap</div><div class="kpi-value" id="eff-patients">—</div><div class="kpi-sub" id="eff-patients-sub">Memuat...</div></div>
+            <div class="kpi-card red"><div class="kpi-label">Turn Over Interval (TOI)</div><div class="kpi-value" id="eff-toi">— hari</div><div class="kpi-sub">Estimasi dari ALOS &amp; BOR</div></div>
+        </div>
+        <div class="insight-card">
+            <div class="insight-label">Analisis Efisiensi Operasional</div>
+            <div class="insight-text" id="eff-insight-text">Memuat analisis...</div>
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card"><div class="chart-title">Tren BOR Bulanan</div><div class="chart-subtitle">Persentase hunian tempat tidur per bulan</div><div class="chart-wrap"><canvas id="e-borTrendChart"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">BOR per Bangsal</div><div class="chart-subtitle">Utilisasi per unit bangsal</div><div class="chart-wrap"><canvas id="e-borWardChart"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">Tren ALOS Bulanan</div><div class="chart-subtitle">Rata-rata durasi rawat inap (hari) per bulan</div><div class="chart-wrap"><canvas id="e-alosTrendChart"></canvas></div></div>
+            <div class="chart-card"><div class="chart-title">ALOS per Bangsal</div><div class="chart-subtitle">Rata-rata hari rawat inap vs target 4 hari</div><div class="chart-wrap"><canvas id="e-alosWardChart"></canvas></div></div>
+        </div>
+        <div class="table-card">
+            <div class="table-header"><div><div class="chart-title">Detail BOR per Bangsal</div><div class="chart-subtitle" style="margin:0">Rentang ideal BOR: 75–85%</div></div></div>
+            <hr class="section-divider">
+            <table><thead><tr><th>Bangsal</th><th>Kapasitas TT</th><th>TT Terisi</th><th>BOR (%)</th><th>Sumber</th><th>Status</th></tr></thead>
+            <tbody id="eff-bor-tbody"></tbody></table>
+        </div>
+        <div class="table-card">
+            <div class="table-header"><div><div class="chart-title">Detail ALOS per Bangsal</div><div class="chart-subtitle" style="margin:0">Target ALOS: &lt;4 hari</div></div></div>
+            <hr class="section-divider">
+            <table><thead><tr><th>Bangsal</th><th>ALOS (Hari)</th><th>Pasien Keluar</th><th>Sumber</th><th>Status vs Target</th></tr></thead>
+            <tbody id="eff-alos-tbody"></tbody></table>
+        </div>
     </div>
 
-    <!-- ═══════════════════════════════════════
-                        INPUT DATA
-    ════════════════════════════════════════ -->
+    <!-- ========== PAGE: INPUT DATA ========== -->
     <div class="page" id="page-input">
         <div class="page-header">
             <div class="page-tag">Manajemen Data</div>
             <div class="page-title">Input Data Kesehatan</div>
             <div class="page-desc">Catat data operasional, klinis, layanan, dan keuangan fasilitas secara berkala.</div>
         </div>
-
         <div class="status-banner banner-success" id="saveIndicator">
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
             Data berhasil disimpan &amp; dashboard diperbarui.
@@ -559,10 +538,7 @@
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             Mode edit aktif — perubahan akan memperbarui entri yang dipilih.
         </div>
-
         <form id="healthForm" onsubmit="handleSubmit(event)">
-
-            <!-- Data Pasien -->
             <div class="form-section">
                 <div class="form-section-title">Data Pasien</div>
                 <div class="form-grid">
@@ -578,8 +554,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Operasional & Rawat Inap -->
             <div class="form-section">
                 <div class="form-section-title">Operasional &amp; Rawat Inap</div>
                 <div class="form-grid">
@@ -588,12 +562,9 @@
                         <span class="form-hint">Unit bangsal perawatan</span>
                         <select id="ward" class="form-input">
                             <option value="">— Pilih Bangsal —</option>
-                            <option>ICU / Intensif</option>
-                            <option>Bangsal Mawar (VIP)</option>
-                            <option>Bangsal Melati (Kelas 1)</option>
-                            <option>Bangsal Anggrek (Kelas 2)</option>
-                            <option>Bangsal Dahlia (Kelas 3)</option>
-                            <option>Perinatologi / Neonatus</option>
+                            <option>ICU / Intensif</option><option>Bangsal Mawar (VIP)</option>
+                            <option>Bangsal Melati (Kelas 1)</option><option>Bangsal Anggrek (Kelas 2)</option>
+                            <option>Bangsal Dahlia (Kelas 3)</option><option>Perinatologi / Neonatus</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -601,23 +572,19 @@
                         <span class="form-hint">Unit layanan yang dikunjungi</span>
                         <select id="serviceType" class="form-input">
                             <option value="">— Pilih Layanan —</option>
-                            <option>Poli Gigi</option>
-                            <option>Poli Anak</option>
-                            <option>Poli Kandungan</option>
-                            <option>Poli Dalam</option>
-                            <option>Poli Mata</option>
-                            <option>Rawat Inap</option>
+                            <option>Poli Gigi</option><option>Poli Anak</option><option>Poli Kandungan</option>
+                            <option>Poli Dalam</option><option>Poli Mata</option><option>Rawat Inap</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Tanggal Mulai Rawat Inap</label>
                         <span class="form-hint">Operasional &amp; klinis</span>
-                        <input type="date" id="admissionDate" class="form-input" />
+                        <input type="date" id="admissionDate" class="form-input" onchange="calcLOS()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Tanggal Selesai Rawat Inap</label>
                         <span class="form-hint">Operasional &amp; klinis</span>
-                        <input type="date" id="dischargeDate" class="form-input" />
+                        <input type="date" id="dischargeDate" class="form-input" onchange="calcLOS()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Durasi Inap (hari)</label>
@@ -626,8 +593,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Layanan & Kunjungan -->
             <div class="form-section">
                 <div class="form-section-title">Layanan &amp; Kunjungan Pasien</div>
                 <div class="form-grid">
@@ -639,16 +604,16 @@
                     <div class="form-group">
                         <label class="form-label">Waktu Registrasi</label>
                         <span class="form-hint">Jam check-in pasien</span>
-                        <input type="time" id="registrationTime" class="form-input" />
+                        <input type="time" id="registrationTime" class="form-input" onchange="calcWait()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Waktu Pemanggilan</label>
                         <span class="form-hint">Jam pasien dipanggil dokter</span>
-                        <input type="time" id="callTime" class="form-input" />
+                        <input type="time" id="callTime" class="form-input" onchange="calcWait()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Waktu Tunggu (menit)</label>
-                        <span class="form-hint">Dihitung otomatis dari registrasi &amp; pemanggilan</span>
+                        <span class="form-hint">Dihitung otomatis</span>
                         <input type="number" id="waitTime" class="form-input" placeholder="Otomatis" readonly />
                     </div>
                     <div class="form-group">
@@ -662,36 +627,58 @@
                     <label for="isFirstVisit">Kunjungan pertama (pasien baru)</label>
                 </div>
             </div>
-
-            <!-- Keuangan -->
             <div class="form-section">
-            <div class="form-section-title">Keuangan</div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">Tanggal Transaksi</label>
-                    <span class="form-hint">Tanggal pemasukan / pengeluaran</span>
-                    <input type="date" id="financeDate" class="form-input" />
+                <div class="form-section-title">Data SDM / Dokter</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Nama Dokter</label>
+                        <span class="form-hint">Nama dokter yang menangani</span>
+                        <input type="text" id="doctorName" class="form-input" placeholder="Cth: dr. Andi Wijaya, Sp.PD" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Poli Dokter</label>
+                        <span class="form-hint">Poli tempat dokter bertugas</span>
+                        <select id="doctorPoli" class="form-input">
+                            <option value="">— Pilih Poli —</option>
+                            <option>Poli Gigi</option>
+                            <option>Poli Anak</option>
+                            <option>Poli Kandungan</option>
+                            <option>Poli Dalam</option>
+                            <option>Poli Mata</option>
+                            <option>Rawat Inap</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Jenis Transaksi</label>
-                    <span class="form-hint">Pemasukan atau pengeluaran</span>
-                    <select id="financeType" class="form-input">
-                        <option value="">— Pilih Jenis —</option>
-                        <option value="Pemasukan">Pemasukan</option>
-                        <option value="Pengeluaran">Pengeluaran</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Unit / Kategori</label>
-                    <span class="form-hint">Sumber pendapatan atau kategori biaya</span>
-                    <select id="financeUnit" class="form-input">
-                        <option value="">— Pilih Unit —</option>
-                        <option value="Rawat Jalan">Rawat Jalan</option>
-                        <option value="Rawat Inap">Rawat Inap</option>
-                        <option value="Farmasi">Farmasi</option>
-                        <option value="Loket & Lain">Loket &amp; Lain</option>
-                    </select>
-                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-section-title">Keuangan</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Tanggal Transaksi</label>
+                        <span class="form-hint">Tanggal pemasukan / pengeluaran</span>
+                        <input type="date" id="financeDate" class="form-input" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jenis Transaksi</label>
+                        <span class="form-hint">Pemasukan atau pengeluaran</span>
+                        <select id="financeType" class="form-input">
+                            <option value="">— Pilih Jenis —</option>
+                            <option value="Pemasukan">Pemasukan</option>
+                            <option value="Pengeluaran">Pengeluaran</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Unit / Kategori</label>
+                        <span class="form-hint">Sumber pendapatan atau kategori biaya</span>
+                        <select id="financeUnit" class="form-input">
+                            <option value="">— Pilih Unit —</option>
+                            <option value="Rawat Jalan">Rawat Jalan</option>
+                            <option value="Rawat Inap">Rawat Inap</option>
+                            <option value="Farmasi">Farmasi</option>
+                            <option value="Loket & Lain">Loket &amp; Lain</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label class="form-label">Jumlah (Rp)</label>
                         <span class="form-hint">Nominal dalam Rupiah</span>
@@ -703,30 +690,29 @@
                         <input type="text" id="financeNote" class="form-input" placeholder="Cth: Pembayaran rawat inap, gaji dokter spesialis..." />
                     </div>
                 </div>
-                </div>
-
-                <button type="submit" class="btn-submit" id="submitBtn">
-                    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h11a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
-                    Simpan Data
-                </button>
-            </form>
-
-            <!-- Histori -->
-            <div class="table-card" style="margin-top:32px">
-                <div class="table-header">
-                    <div><div class="chart-title">Histori Data Tersimpan</div><div class="chart-subtitle" style="margin:0">Disimpan di browser lokal</div></div>
-                    <button class="clear-btn" onclick="clearAll()">Hapus Semua</button>
-                </div>
-                <hr class="section-divider">
-                <div style="overflow-x:auto">
-                <table>
-                    <thead><tr><th>#</th><th>Nama Pasien</th><th>No.RM</th><th>Bangsal</th><th>Poli/Layanan</th><th>Tgl Masuk</th><th>Tgl Keluar</th><th>Durasi</th><th>Tunggu</th><th>Kepuasan</th><th>Transaksi</th><th>Aksi</th></tr></thead>
-                    <tbody id="historyTableBody"><tr><td colspan="12" class="history-empty">Belum ada data tersimpan.</td></tr></tbody>
-                </table>
-                </div>
             </div>
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h11a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+                Simpan Data
+            </button>
+        </form>
+        <div class="table-card" style="margin-top:32px">
+            <div class="table-header">
+                <div><div class="chart-title">Histori Data Tersimpan</div><div class="chart-subtitle" style="margin:0">Disimpan di browser lokal</div></div>
+                <button class="clear-btn" onclick="clearAll()">Hapus Semua</button>
+            </div>
+            <hr class="section-divider">
+            <div style="overflow-x:auto">
+            <table>
+                <thead><tr><th>#</th><th>Nama Pasien</th><th>No.RM</th><th>Bangsal</th><th>Poli/Layanan</th><th>Tgl Masuk</th><th>Tgl Keluar</th><th>Durasi</th><th>Tunggu</th><th>Kepuasan</th><th>Transaksi</th><th>Aksi</th></tr></thead>
+                <tbody id="historyTableBody"><tr><td colspan="12" class="history-empty">Belum ada data tersimpan.</td></tr></tbody>
+            </table>
+            </div>
+        </div>
     </div>
+
 </main>
+</div><!-- end dashboardApp -->
 
 <script src="script.js"></script>
 </body>
