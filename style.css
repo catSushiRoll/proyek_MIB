@@ -22,6 +22,9 @@ body {
     min-height: 100vh;
 }
 
+.admin-only { display: none !important; }
+.admin-only.admin-visible { display: flex !important; }
+
 /* SIDEBAR */
 .sidebar {
     width: 240px;
