@@ -604,10 +604,23 @@ function editEntry(idx){
     if(btn)btn.innerHTML='<svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Perbarui Data';
     window.scrollTo({top:0,behavior:'smooth'});
 }
-function deleteEntry(idx){
+async function deleteEntry(idx){
     if(!confirm('Hapus data ini?'))return;
-    const h=getData();h.splice(idx,1);saveAll(h);
+    const h=getData();
+    const mongoId=h[idx]?._id;  // grab MongoDB _id before splicing
+    h.splice(idx,1);saveAll(h);
     if(editingIndex===idx){editingIndex=null;resetForm();}
+
+    // Delete from MongoDB if record has a MongoDB _id
+    if(mongoId){
+        try{
+            await fetch(`http://localhost:3000/delete/${mongoId}`,{method:'DELETE'});
+            console.log('MongoDB delete success');
+        }catch(err){
+            console.warn('MongoDB delete failed (local delete still applied):',err.message);
+        }
+    }
+
     renderHistory();refreshAllPages();
 }
 function clearAll(){
@@ -636,19 +649,39 @@ async function handleSubmit(e){
 
   // Save to localStorage (existing behaviour)
   const h = getData();
+  const existingMongoId = editingIndex !== null ? h[editingIndex]?._id : null;
   if (editingIndex!==null) { h[editingIndex]=data; editingIndex=null; } else { h.push(data); }
   saveAll(h);
 
   // Send to MongoDB via Express server
   try {
+    if (existingMongoId) {
+      // UPDATE existing record in MongoDB
+      const res = await fetch(`http://localhost:3000/update/${existingMongoId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || 'Server error');
+      console.log('MongoDB update success:', existingMongoId);
+    } else {
+    // INSERT new record in MongoDB
     const res = await fetch('http://localhost:3000/insert', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
     });
     const result = await res.json();
     if (!res.ok) throw new Error(result.error || 'Server error');
+
+    // Save the returned _id back into the localStorage record
+    const latest = getData();
+    latest[latest.length - 1]._id = result.id;
+    saveAll(latest);
+
     console.log('MongoDB insert success:', result.id);
+    }
   } catch (err) {
     console.error('MongoDB error:', err.message);
     alert('⚠️ Data tersimpan lokal, tapi gagal kirim ke server:\n' + err.message);
