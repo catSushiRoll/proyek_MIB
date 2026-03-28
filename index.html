@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedCore — Dashboard KPI</title>
+    <title>MedKPI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 
   <!-- LEFT: Form Panel -->
   <div class="login-panel-left">
-    <div class="login-logo">Med<span>Core</span></div>
+    <div class="login-logo">Med<span>KPI</span></div>
     <div class="login-subtitle">RSUD Harapan Sehat</div>
 
     <div class="login-heading">Selamat Datang</div>
@@ -56,9 +56,6 @@
       Masuk ke Dashboard
     </button>
 
-    <div style="margin-top:auto; padding-top:40px; font-size:11px; color:var(--muted);">
-      RSUD Harapan Sehat © 2025 &nbsp;·&nbsp; MedCore v2.0
-    </div>
   </div>
 
   <!-- RIGHT: Visual Panel -->
@@ -109,7 +106,7 @@
     <!-- Welcome text -->
     <div class="login-welcome">
       <div class="login-welcome-title">Dashboard<br>KPI Rumah<br>Sakit.</div>
-      <div class="login-welcome-sub">Pantau performa klinis, keuangan, dan operasional fasilitas kesehatan secara real-time.</div>
+      <div class="login-welcome-sub">Pantau performa klinis, keuangan, kepuasan, dan operasional fasilitas kesehatan.</div>
     </div>
   </div>
 
@@ -133,19 +130,19 @@
 
     <!-- Logo area -->
     <div class="sidebar-brand">
-        <div class="sidebar-logo">Med<span>Core</span></div>
+        <div class="sidebar-logo">Med<span>KPI</span></div>
         <div class="sidebar-subtitle">RSUD Harapan Sehat</div>
     </div>
 
     <div class="nav-label sidebar-text">Menu</div>
 
-    <button class="nav-item" onclick="showPage('home', this)" data-tooltip="Beranda / Overview">
+    <button class="nav-item" onclick="showPage('home', this)" data-tooltip="Overview">
         <span class="nav-icon">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
             </svg>
         </span>
-        <span class="nav-text">Beranda / Overview</span>
+        <span class="nav-text">Beranda</span>
     </button>
     <button class="nav-item" onclick="showPage('service', this)" data-tooltip="Kualitas Layanan">
         <span class="nav-icon">
@@ -171,13 +168,13 @@
         </span>
         <span class="nav-text">Human Resources</span>
     </button>
-    <button class="nav-item" onclick="showPage('readmission', this)" data-tooltip="Readmission Rate">
+    <button class="nav-item" onclick="showPage('readmission', this)" data-tooltip="Klinis">
         <span class="nav-icon">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
             </svg>
         </span>
-        <span class="nav-text">Readmission Rate</span>
+        <span class="nav-text">Klinis</span>
     </button>
     <button class="nav-item" onclick="showPage('efficiency', this)" data-tooltip="Efisiensi Operasional">
         <span class="nav-icon">
@@ -185,7 +182,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
             </svg>
         </span>
-        <span class="nav-text">Efisiensi Operasional</span>
+        <span class="nav-text">Operasional</span>
     </button>
     <button class="nav-item" onclick="showPage('input', this)" data-tooltip="Input Data">
         <span class="nav-icon">
@@ -204,7 +201,7 @@
         <span class="nav-text">Logout</span>
     </button>
 
-    <div class="sidebar-footer sidebar-text">RSUD Harapan Sehat © 2025</div>
+    <!-- <div class="sidebar-footer sidebar-text">RSUD Harapan Sehat © 2025</div> -->
 </aside>
 
 <!-- MAIN CONTENT -->
@@ -214,24 +211,24 @@
     <div class="page active" id="page-home">
         <div class="page-header">
             <div class="page-tag">Overview</div>
-            <div class="page-title">Dashboard Fasilitas Kesehatan</div>
-            <div class="page-desc">Ringkasan performa manajemen &amp; klinis — semua KPI utama dalam satu tampilan.</div>
+            <div class="page-title">Dashboard Key Performance Indicator (KPI)</div>
+            <!-- <div class="page-desc">Ringkasan performa manajemen dan klinis.</div> -->
         </div>
         <div class="kpi-grid">
             <div class="kpi-card blue">
                 <div class="kpi-label">Total Pendapatan</div>
                 <div class="kpi-value" id="home-revenue">Rp 1,2 M</div>
-                <div class="kpi-sub" id="home-revenue-sub"><span class="kpi-badge badge-up">Kumulatif</span> Jan–Jun 2025</div>
+                <div class="kpi-sub" id="home-revenue-sub"> Per Mar 2026</div>
             </div>
             <div class="kpi-card green">
                 <div class="kpi-label">Bed Occupancy Rate</div>
-                <div class="kpi-value" id="home-bor">78%</div>
-                <div class="kpi-sub" id="home-bor-sub">Kapasitas Rawat Inap Jun 2025</div>
+                <div class="kpi-value">81%</div>
+                <div class="kpi-sub" id="home-bor-sub">Kapasitas Rawat Inap Mar 2026</div>
             </div>
             <div class="kpi-card red">
                 <div class="kpi-label">Readmission Rate</div>
                 <div class="kpi-value">5,2%</div>
-                <div class="kpi-sub"><span class="kpi-badge badge-warn">Target &lt;5%</span> dalam 30 hari</div>
+                <div class="kpi-sub"><span class="kpi-badge badge-warn">Target &lt;5%</span></div>
             </div>
             <div class="kpi-card purple">
                 <div class="kpi-label">Patient Satisfaction</div>
@@ -241,23 +238,23 @@
         </div>
         <div class="chart-grid">
             <div class="chart-card">
-                <div class="chart-title">Distribusi Pemasukan</div>
-                <div class="chart-subtitle">Finance — Porsi pendapatan per unit layanan</div>
+                <div class="chart-title">Distribusi Pemasukan (juta rupiah)</div>
+                <!-- <div class="chart-subtitle">Porsi pendapatan per unit layanan (juta rupiah)</div> -->
                 <div class="chart-wrap"><canvas id="h-financeChart"></canvas></div>
             </div>
             <div class="chart-card">
-                <div class="chart-title">Wait Times per Poli</div>
-                <div class="chart-subtitle">Process — Rata-rata waktu tunggu (menit)</div>
+                <div class="chart-title">Rata-Rata Waktu Tunggu per Poli (menit)</div>
+                <!-- <div class="chart-subtitle">Rata-rata waktu tunggu pasien (menit)</div> -->
                 <div class="chart-wrap"><canvas id="h-waitChart"></canvas></div>
             </div>
             <div class="chart-card">
-                <div class="chart-title">Beban Kerja Staff per Poli</div>
-                <div class="chart-subtitle">Growth — Jumlah pasien per dokter</div>
+                <div class="chart-title">Rasio Pasien per Dokter</div>
+                <!-- <div class="chart-subtitle">Disinkronkan dengan halaman Human Resources</div> -->
                 <div class="chart-wrap"><canvas id="h-staffChart"></canvas></div>
             </div>
             <div class="chart-card">
-                <div class="chart-title">Tren Pasien Baru</div>
-                <div class="chart-subtitle">Growth — Jan–Jun 2025</div>
+                <div class="chart-title">Jumlah Pasien Baru</div>
+                <!-- <div class="chart-subtitle">Growth — Jan–Jun 2025</div> -->
                 <div class="chart-wrap"><canvas id="h-patientChart"></canvas></div>
             </div>
         </div>
@@ -266,12 +263,12 @@
     <!-- ========== PAGE: SERVICE QUALITY ========== -->
     <div class="page" id="page-service">
         <div class="page-header">
-            <div class="page-tag">KPI Kualitas Layanan</div>
-            <div class="page-title">Kepuasan &amp; Keterjangkauan Pasien</div>
-            <div class="page-desc">Analisis mendalam kepuasan pasien, pasien baru, dan waktu tunggu per poli.</div>
+            <div class="page-tag">Kualitas Layanan</div>
+            <div class="page-title">Kepuasan dan Keterjangkauan Pasien</div>
+            <!-- <div class="page-desc">Analisis kepuasan pasien, pasien baru, dan waktu tunggu per poli.</div> -->
         </div>
         <div class="insight-card">
-            <div class="insight-label">Analisis Periode Jun 2025</div>
+            <div class="insight-label">Analisis</div>
             <div class="insight-text" id="svc-insight-text">Memuat analisis...</div>
         </div>
         <div class="filter-bar">
@@ -287,36 +284,40 @@
                 <option>Poli Gigi</option><option>Poli Anak</option><option>Poli Kandungan</option>
                 <option>Poli Dalam</option><option>Poli Mata</option>
             </select>
-            <div class="filter-divider"></div>
-            <span class="filter-badge" id="svc-data-badge">● Baseline saja</span>
+            <!-- <div class="filter-divider"></div> -->
+            <!-- <span class="filter-badge" id="svc-data-badge">● Baseline saja</span> -->
         </div>
         <div class="chart-grid">
             <div class="chart-card">
                 <div class="chart-title">Skor Kepuasan Pasien per Bulan</div>
-                <div class="chart-subtitle">Skala 1–5 berdasarkan survei exit pasien</div>
+                <!-- <div class="chart-subtitle">Skala 1–5 berdasarkan survei pasien keluar</div> -->
                 <div class="chart-wrap"><canvas id="s-satisfactionChart"></canvas></div>
             </div>
             <div class="chart-card">
-                <div class="chart-title">Tren Pasien Baru</div>
-                <div class="chart-subtitle">Jumlah pasien baru per bulan, Jan–Jun 2025</div>
+                <div class="chart-title">Jumlah Pasien Baru per Bulan</div>
+                <!-- <div class="chart-subtitle">Tren pasien baru periode Okt 2025–Mar 2026</div> -->
                 <div class="chart-wrap"><canvas id="s-newPatientChart"></canvas></div>
             </div>
             <div class="chart-card full">
                 <div class="chart-title">Rata-rata Waktu Tunggu per Poli</div>
-                <div class="chart-subtitle">Dalam menit — target internal &lt;30 menit</div>
+                <!-- <div class="chart-subtitle">Target internal &lt;30 menit</div> -->
                 <div class="chart-wrap"><canvas id="s-waitChart"></canvas></div>
             </div>
         </div>
         <div class="table-card">
-            <div class="table-header"><div><div class="chart-title">Data Kepuasan Pasien</div><div class="chart-subtitle" style="margin:0">Sumber: Survei Exit Pasien, Jan–Jun 2025</div></div></div>
-            <hr class="section-divider">
-            <table><thead><tr><th>Bulan</th><th>Responden</th><th>Skor Rata-rata</th><th>Puas (%)</th><th>Sumber</th><th>Status</th></tr></thead>
+            <div class="table-header"><div><div class="chart-title">Data Kepuasan Pasien</div>
+            <!-- <div class="chart-subtitle" style="margin:0">Sumber: Survei Exit Pasien, Jan–Jun 2025</div> -->
+        </div></div>
+            <!-- <hr class="section-divider"> -->
+            <table><thead><tr><th>Bulan</th><th>Responden</th><th>Skor Rata-rata</th><th>Status</th></tr></thead>
             <tbody id="svc-satisfaction-tbody"></tbody></table>
         </div>
         <div class="table-card">
-            <div class="table-header"><div><div class="chart-title">Data Waktu Tunggu per Poli</div><div class="chart-subtitle" style="margin:0">Rata-rata — Target: &lt;30 menit</div></div></div>
-            <hr class="section-divider">
-            <table><thead><tr><th>Poli</th><th>Waktu Tunggu</th><th>Sumber</th><th>Status vs Target</th></tr></thead>
+            <div class="table-header"><div><div class="chart-title">Data Waktu Tunggu per Poli</div>
+            <!-- <div class="chart-subtitle" style="margin:0">Rata-rata — Target: &lt;30 menit</div> -->
+        </div></div>
+            <!-- <hr class="section-divider"> -->
+            <table><thead><tr><th>Poli</th><th>Waktu Tunggu</th><th>Status vs Target</th></tr></thead>
             <tbody id="svc-wait-tbody"></tbody></table>
         </div>
     </div>
@@ -324,12 +325,12 @@
     <!-- ========== PAGE: FINANCE ========== -->
     <div class="page" id="page-finance">
         <div class="page-header">
-            <div class="page-tag">KPI Keuangan</div>
-            <div class="page-title">Pendapatan &amp; Distribusi Keuangan</div>
-            <div class="page-desc">Analisis distribusi pemasukan dan tren pendapatan bulanan fasilitas.</div>
+            <div class="page-tag">Keuangan</div>
+            <div class="page-title">Pendapatan dan Distribusi Keuangan</div>
+            <!-- <div class="page-desc">Analisis distribusi pemasukan dan tren pendapatan bulanan fasilitas.</div> -->
         </div>
         <div class="insight-card">
-            <div class="insight-label">Analisis Keuangan — Jun 2025</div>
+            <div class="insight-label">Analisis</div>
             <div class="insight-text" id="fin-insight-text">Memuat analisis...</div>
         </div>
         <div class="filter-bar">
@@ -344,31 +345,35 @@
                 <option value="all">Semua Unit</option>
                 <option>Rawat Jalan</option><option>Rawat Inap</option><option>Farmasi</option><option>Loket &amp; Lain</option>
             </select>
-            <div class="filter-divider"></div>
-            <span class="filter-badge" id="fin-data-badge">● Baseline saja</span>
+            <!-- <div class="filter-divider"></div>
+            <span class="filter-badge" id="fin-data-badge">● Baseline saja</span> -->
         </div>
         <div class="chart-grid">
             <div class="chart-card">
-                <div class="chart-title">Distribusi Pemasukan</div>
-                <div class="chart-subtitle">Porsi pendapatan per unit layanan</div>
+                <div class="chart-title">Distribusi Pemasukan (juta rupiah)</div>
+                <!-- <div class="chart-subtitle">Porsi pendapatan per unit layanan</div> -->
                 <div class="chart-wrap"><canvas id="f-pieChart"></canvas></div>
             </div>
             <div class="chart-card">
                 <div class="chart-title">Pendapatan Bulanan</div>
-                <div class="chart-subtitle">Total pendapatan dalam juta Rupiah, Jan–Jun 2025</div>
+                <!-- <div class="chart-subtitle">Total pendapatan dalam juta Rupiah, Jan–Jun 2025</div> -->
                 <div class="chart-wrap"><canvas id="f-revenueChart"></canvas></div>
             </div>
         </div>
         <div class="table-card">
-            <div class="table-header"><div><div class="chart-title">Detail Distribusi Pemasukan</div><div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan Internal</div></div></div>
-            <hr class="section-divider">
-            <table><thead><tr><th>Unit Layanan</th><th>Pendapatan (Juta)</th><th>Porsi (%)</th><th>Target Bulanan</th><th>Pencapaian Target</th><th>Status</th></tr></thead>
+            <div class="table-header"><div><div class="chart-title">Detail Distribusi Pemasukan</div>
+            <!-- <div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan Internal</div> -->
+        </div></div>
+            <!-- <hr class="section-divider"> -->
+            <table><thead><tr><th>Unit Layanan</th><th>Pendapatan (Juta)</th><th>Target Bulanan</th><th>Pencapaian Target</th><th>Status</th></tr></thead>
             <tbody id="fin-dist-tbody"></tbody></table>
         </div>
         <div class="table-card">
-            <div class="table-header"><div><div class="chart-title">Pendapatan Bulanan — Jan s/d Jun 2025</div><div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan, dalam Juta Rupiah</div></div></div>
-            <hr class="section-divider">
-            <table><thead><tr><th>Bulan</th><th>Rawat Jalan</th><th>Rawat Inap</th><th>Farmasi</th><th>Loket &amp; Lain</th><th>Total</th><th>Sumber</th></tr></thead>
+            <div class="table-header"><div><div class="chart-title">Pendapatan Bulanan</div>
+            <!-- <div class="chart-subtitle" style="margin:0">Sumber: Laporan Keuangan, dalam Juta Rupiah</div> -->
+        </div></div>
+            <!-- <hr class="section-divider"> -->
+            <table><thead><tr><th>Bulan</th><th>Rawat Jalan</th><th>Rawat Inap</th><th>Farmasi</th><th>Loket &amp; Lain</th><th>Total</th></tr></thead>
             <tbody id="fin-monthly-tbody"></tbody></table>
         </div>
     </div>
@@ -376,28 +381,34 @@
     <!-- ========== PAGE: HR ========== -->
     <div class="page" id="page-hr">
         <div class="page-header">
-            <div class="page-tag">KPI Human Resources</div>
+            <div class="page-tag">Human Resources</div>
             <div class="page-title">Sumber Daya Manusia</div>
-            <div class="page-desc">Distribusi beban kerja per unit layanan berdasarkan data Input Data.</div>
+            <!-- <div class="page-desc">Analisis distribusi beban kerja tenaga kesehatan per unit layanan.</div> -->
+        </div>
+        <div class="insight-card">
+            <div class="insight-label">Analisis</div>
+            <div class="insight-text" id="hr-insight-text">Memuat analisis...</div>
         </div>
         <div class="chart-grid">
             <div class="chart-card full">
                 <div class="chart-title">Jumlah Pasien per Unit Layanan</div>
-                <div class="chart-subtitle">Data diambil dari section Input Data — gabungan baseline + live</div>
+                <!-- <div class="chart-subtitle">Data diambil dari section Input Data — gabungan baseline + live</div> -->
                 <div class="chart-wrap"><canvas id="hr-staffPatientChart"></canvas></div>
             </div>
         </div>
         <!-- Tabel Detail HR -->
         <div class="table-card">
-            <div class="table-header"><div><div class="chart-title">Detail Beban Kerja per Unit</div><div class="chart-subtitle" style="margin:0">Rekap dari data Input Data: jumlah pasien, rata-rata LOS, dan kepuasan</div></div></div>
-            <hr class="section-divider">
+            <div class="table-header"><div><div class="chart-title">Detail Beban Kerja per Unit</div>
+            <!-- <div class="chart-subtitle" style="margin:0">Rekap dari data Input Data: jumlah pasien, rata-rata LOS, dan kepuasan</div> -->
+        </div></div>
+            <!-- <hr class="section-divider"> -->
             <table>
                 <thead>
                     <tr>
                         <th>Nama Poli</th>
                         <th>Jumlah Dokter</th>
                         <th>Jumlah Pasien</th>
-                        <th>Proporsi Pasien</th>
+                        <!-- <th>Proporsi Pasien</th> -->
                         <th>Rasio Pasien/Dokter</th>
                     </tr>
                 </thead>
@@ -408,41 +419,113 @@
         </div>
     </div>
 
-    <!-- ========== PAGE: READMISSION ========== -->
+    <!-- ========== PAGE: READMISSION / KLINIS ========== -->
     <div class="page" id="page-readmission">
         <div class="page-header">
-            <div class="page-tag">KPI Klinis</div>
-            <div class="page-title">Readmission Rate</div>
-            <div class="page-desc">Data diambil otomatis dari section Input Data. Sistem mendeteksi readmission dalam 30 hari.</div>
+            <div class="page-tag">Klinis</div>
+            <div class="page-title">Capaian Klinis</div>
+            <!-- <div class="page-desc">Analisis tingkat readmisi pasien per bulan dan per bangsal.</div> -->
         </div>
+
+        <!-- INSIGHT -->
+        <div class="insight-card">
+            <div class="insight-label">Analisis</div>
+            <div class="insight-text" id="ra-insight-text">
+                Readmission rate bulan Juni 2025 tercatat <strong style="color:#fff">5,2%</strong>, sedikit di atas target internal &lt;5%.
+            </div>
+        </div>
+
+        <!-- KPI CARDS — 6 cards -->
         <div class="kpi-grid" style="grid-template-columns: repeat(3,1fr);">
             <div class="kpi-card blue">
                 <div class="kpi-label">Total Kunjungan</div>
-                <div class="kpi-value" id="ra-totalVisits">0</div>
-                <div class="kpi-sub">Semua data dari Input Data</div>
+                <div class="kpi-value" id="ra-totalVisits">2.200</div>
+                <div class="kpi-sub">30 hari terakhir</div>
             </div>
-            <div class="kpi-card red">
+            <div class="kpi-card purple">
                 <div class="kpi-label">Readmission Rate</div>
-                <div class="kpi-value" id="ra-rate">0%</div>
-                <div class="kpi-sub"><span class="kpi-badge badge-warn">Target &lt;5%</span> dalam 30 hari</div>
+                <div class="kpi-value" id="ra-rate">5,2%</div>
+                <div class="kpi-sub"><span class="kpi-badge badge-warn">Target &lt;5%</span></div>
             </div>
-            <div class="kpi-card green">
+            <div class="kpi-card purple">
                 <div class="kpi-label">Pasien Readmit</div>
-                <div class="kpi-value" id="ra-readmitCount">0</div>
+                <div class="kpi-value" id="ra-readmitCount">114</div>
                 <div class="kpi-sub">Kembali dalam 30 hari</div>
             </div>
         </div>
-        <div class="chart-grid" style="grid-template-columns:1fr;">
+
+        <!-- CHARTS ROW 1 -->
+        <div class="chart-grid">
             <div class="chart-card">
-                <div class="chart-title">Tren Readmission per Bulan</div>
-                <div class="chart-subtitle">Jumlah pasien readmit (kembali dalam 30 hari) per bulan</div>
+                <div class="chart-title">Tren Readmission Rate per Bulan</div>
+                <!-- <div class="chart-subtitle">Persentase readmission bulanan vs target &lt;5%</div> -->
                 <div class="chart-wrap"><canvas id="ra-trendChart"></canvas></div>
             </div>
+            <div class="chart-card">
+                <div class="chart-title">Readmission per Bangsal</div>
+                <!-- <div class="chart-subtitle">Jumlah kasus readmit per unit bangsal, Jan–Jun 2025</div> -->
+                <div class="chart-wrap"><canvas id="ra-wardChart"></canvas></div>
+            </div>
         </div>
+
+        <!-- TABLE: Readmission per bangsal -->
         <div class="table-card">
             <div class="table-header">
                 <div>
-                    <div class="chart-title">Daftar Kunjungan Pasien</div>
+                    <div class="chart-title">Readmission Rate per Bangsal</div>
+                    <!-- <div class="chart-subtitle" style="margin:0">Baseline Jan–Jun 2025 — Target: &lt;5% per bangsal</div> -->
+                </div>
+            </div>
+            <!-- <hr class="section-divider"> -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bangsal</th><th>Total Pasien Keluar</th><th>Readmit</th>
+                        <th>Readmission Rate</th><th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>ICU / Intensif</td><td>88</td><td>7</td><td>7,9%</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">Melebihi Target</span></td></tr>
+                    <tr><td>Bangsal Mawar (VIP)</td><td>142</td><td>5</td><td>3,5%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
+                    <tr><td>Bangsal Melati (Kelas 1)</td><td>210</td><td>9</td><td>4,3%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
+                    <tr><td>Bangsal Anggrek (Kelas 2)</td><td>318</td><td>19</td><td>6,0%</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">Melebihi Target</span></td></tr>
+                    <tr><td>Bangsal Dahlia (Kelas 3)</td><td>401</td><td>24</td><td>6,0%</td><td><span class="td-pill" style="background:#FEF2F2;color:#DC2626">Melebihi Target</span></td></tr>
+                    <tr><td>Perinatologi / Neonatus</td><td>97</td><td>3</td><td>3,1%</td><td><span class="td-pill" style="background:#ECFDF5;color:#059669">Tercapai</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TABLE: Indikator klinis bulanan -->
+        <div class="table-card">
+            <div class="table-header">
+                <div>
+                    <div class="chart-title">Rekap Indikator Klinis Bulanan</div>
+                    <!-- <div class="chart-subtitle" style="margin:0">Baseline Jan–Jun 2025 — Readmission, HAI, Komplikasi, Mortalitas</div> -->
+                </div>
+            </div>
+            <!-- <hr class="section-divider"> -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bulan</th><th>Total Pasien</th><th>Readmit</th><th>Readmission Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Januari</td><td>1.600</td><td>92</td><td>5,8%</td></tr>
+                    <tr><td>Februari</td><td>1.400</td><td>77</td><td>5,5%</td></tr>
+                    <tr><td>Maret</td><td>1.850</td><td>96</td><td>5,2%</td></tr>
+                    <tr><td>April</td><td>1.700</td><td>85</td><td>5,0%</td></tr>
+                    <tr><td>Mei</td><td>2.000</td><td>102</td><td>5,1%</td></tr>
+                    <tr><td>Juni</td><td>2.200</td><td>114</td><td>5,2%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TABLE: Live kunjungan pasien
+        <div class="table-card">
+            <div class="table-header">
+                <div>
+                    <div class="chart-title">Daftar Kunjungan Pasien (Live)</div>
                     <div class="chart-subtitle" style="margin:0">Sistem mendeteksi otomatis readmission dalam 30 hari — sumber: Input Data</div>
                 </div>
             </div>
@@ -463,24 +546,28 @@
                     </td></tr>
                 </tbody>
             </table>
-        </div>
+        </div> -->
     </div>
 
     <!-- ========== PAGE: EFISIENSI OPERASIONAL ========== -->
     <div class="page" id="page-efficiency">
         <div class="page-header">
-            <div class="page-tag">KPI Efisiensi Operasional</div>
-            <div class="page-title">Bed Occupancy &amp; Length of Stay</div>
-            <div class="page-desc">Analisis utilisasi tempat tidur dan durasi rawat inap per bangsal.</div>
+            <div class="page-tag">Operasional</div>
+            <div class="page-title">Efisiensi Rawat Inap</div>
+            <!-- <div class="page-desc">Analisis utilisasi tempat tidur dan durasi rawat inap per bangsal.</div> -->
+        </div>
+        <div class="insight-card">
+            <div class="insight-label">Analisis</div>
+            <div class="insight-text" id="eff-insight-text">Memuat analisis...</div>
         </div>
         <div class="filter-bar">
             <label>Filter:</label>
-            <select class="filter-select" id="eff-filter-month" onchange="renderEfficiencyPage()">
+        <!--<select class="filter-select" id="eff-filter-month" onchange="renderEfficiencyPage()">
                 <option value="all">Semua Bulan</option>
                 <option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option>
                 <option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option>
             </select>
-            <div class="filter-divider"></div>
+            <div class="filter-divider"></div> -->
             <select class="filter-select" id="eff-filter-ward" onchange="renderEfficiencyPage()">
                 <option value="all">Semua Bangsal</option>
                 <option value="ICU / Intensif">ICU / Intensif</option>
@@ -490,35 +577,44 @@
                 <option value="Bangsal Dahlia (Kelas 3)">Bangsal Dahlia (Kelas 3)</option>
                 <option value="Perinatologi / Neonatus">Perinatologi / Neonatus</option>
             </select>
-            <div class="filter-divider"></div>
-            <span class="filter-badge" id="eff-data-badge">● Live + Baseline</span>
+            <!-- <div class="filter-divider"></div> -->
+            <!-- <span class="filter-badge" id="eff-data-badge">● Live + Baseline</span> -->
         </div>
-        <div class="kpi-grid">
+        <div class="kpi-grid" style="grid-template-columns: repeat(3,1fr);">
             <div class="kpi-card green"><div class="kpi-label">Bed Occupancy Rate (BOR)</div><div class="kpi-value" id="eff-bor">—%</div><div class="kpi-sub" id="eff-bor-sub">Memuat...</div></div>
             <div class="kpi-card blue"><div class="kpi-label">Avg. Length of Stay (ALOS)</div><div class="kpi-value" id="eff-alos">— hari</div><div class="kpi-sub" id="eff-alos-sub">Memuat...</div></div>
-            <div class="kpi-card yellow"><div class="kpi-label">Total Pasien Rawat Inap</div><div class="kpi-value" id="eff-patients">—</div><div class="kpi-sub" id="eff-patients-sub">Memuat...</div></div>
-            <div class="kpi-card red"><div class="kpi-label">Turn Over Interval (TOI)</div><div class="kpi-value" id="eff-toi">— hari</div><div class="kpi-sub">Estimasi dari ALOS &amp; BOR</div></div>
+            <div class="kpi-card red"><div class="kpi-label">Total Pasien Rawat Inap</div><div class="kpi-value" id="eff-patients">—</div><div class="kpi-sub" id="eff-patients-sub">Memuat...</div></div>
+            <!-- <div class="kpi-card red"><div class="kpi-label">Turn Over Interval (TOI)</div><div class="kpi-value" id="eff-toi">— hari</div><div class="kpi-sub">Estimasi dari ALOS &amp; BOR</div></div> -->
         </div>
-        <div class="insight-card">
-            <div class="insight-label">Analisis Efisiensi Operasional</div>
-            <div class="insight-text" id="eff-insight-text">Memuat analisis...</div>
-        </div>
+
         <div class="chart-grid">
-            <div class="chart-card"><div class="chart-title">Tren BOR Bulanan</div><div class="chart-subtitle">Persentase hunian tempat tidur per bulan</div><div class="chart-wrap"><canvas id="e-borTrendChart"></canvas></div></div>
-            <div class="chart-card"><div class="chart-title">BOR per Bangsal</div><div class="chart-subtitle">Utilisasi per unit bangsal</div><div class="chart-wrap"><canvas id="e-borWardChart"></canvas></div></div>
-            <div class="chart-card"><div class="chart-title">Tren ALOS Bulanan</div><div class="chart-subtitle">Rata-rata durasi rawat inap (hari) per bulan</div><div class="chart-wrap"><canvas id="e-alosTrendChart"></canvas></div></div>
-            <div class="chart-card"><div class="chart-title">ALOS per Bangsal</div><div class="chart-subtitle">Rata-rata hari rawat inap vs target 4 hari</div><div class="chart-wrap"><canvas id="e-alosWardChart"></canvas></div></div>
+            <!-- <div class="chart-card"><div class="chart-title">Tren BOR Bulanan</div>
+            <div class="chart-subtitle">Persentase hunian tempat tidur per bulan</div>
+            <div class="chart-wrap"><canvas id="e-borTrendChart"></canvas></div></div> -->
+            <div class="chart-card"><div class="chart-title">BOR per Bangsal</div>
+            <!-- <div class="chart-subtitle">Utilisasi per unit bangsal</div> -->
+            <div class="chart-wrap"><canvas id="e-borWardChart"></canvas></div></div>
+            <!-- <div class="chart-card"><div class="chart-title">Tren ALOS Bulanan</div>
+            <div class="chart-subtitle">Rata-rata durasi rawat inap (hari) per bulan</div>
+            <div class="chart-wrap"><canvas id="e-alosTrendChart"></canvas></div></div> -->
+            <div class="chart-card"><div class="chart-title">ALOS per Bangsal</div>
+            <!-- <div class="chart-subtitle">Rata-rata hari rawat inap vs target 4 hari</div> -->
+            <div class="chart-wrap"><canvas id="e-alosWardChart"></canvas></div></div>
         </div>
         <div class="table-card">
-            <div class="table-header"><div><div class="chart-title">Detail BOR per Bangsal</div><div class="chart-subtitle" style="margin:0">Rentang ideal BOR: 75–85%</div></div></div>
-            <hr class="section-divider">
-            <table><thead><tr><th>Bangsal</th><th>Kapasitas TT</th><th>TT Terisi</th><th>BOR (%)</th><th>Sumber</th><th>Status</th></tr></thead>
+            <div class="table-header"><div><div class="chart-title">Detail BOR per Bangsal</div>
+            <!-- <div class="chart-subtitle" style="margin:0">Rentang ideal BOR: 75–85%</div> -->
+        </div></div>
+            <!-- <hr class="section-divider"> -->
+            <table><thead><tr><th>Bangsal</th><th>Kapasitas TT</th><th>TT Terisi</th><th>BOR (%)</th><th>Status</th></tr></thead>
             <tbody id="eff-bor-tbody"></tbody></table>
         </div>
         <div class="table-card">
-            <div class="table-header"><div><div class="chart-title">Detail ALOS per Bangsal</div><div class="chart-subtitle" style="margin:0">Target ALOS: &lt;4 hari</div></div></div>
-            <hr class="section-divider">
-            <table><thead><tr><th>Bangsal</th><th>ALOS (Hari)</th><th>Pasien Keluar</th><th>Sumber</th><th>Status vs Target</th></tr></thead>
+            <div class="table-header"><div><div class="chart-title">Detail ALOS per Bangsal</div>
+            <!-- <div class="chart-subtitle" style="margin:0">Target ALOS: &lt;4 hari</div> -->
+        </div></div>
+            <!-- <hr class="section-divider"> -->
+            <table><thead><tr><th>Bangsal</th><th>ALOS (Hari)</th><th>Status vs Target</th></tr></thead>
             <tbody id="eff-alos-tbody"></tbody></table>
         </div>
     </div>
@@ -528,7 +624,7 @@
         <div class="page-header">
             <div class="page-tag">Manajemen Data</div>
             <div class="page-title">Input Data Kesehatan</div>
-            <div class="page-desc">Catat data operasional, klinis, layanan, dan keuangan fasilitas secara berkala.</div>
+            <!-- <div class="page-desc">Catat data operasional, klinis, layanan, dan keuangan fasilitas secara berkala.</div> -->
         </div>
         <div class="status-banner banner-success" id="saveIndicator">
             <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
@@ -544,13 +640,13 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label">Nama Pasien</label>
-                        <span class="form-hint">Nama lengkap sesuai rekam medis</span>
+                        <!-- <span class="form-hint">Nama lengkap sesuai rekam medis</span> -->
                         <input type="text" id="patientName" class="form-input" placeholder="Cth: Budi Santoso" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Nomor Rekam Medis</label>
-                        <span class="form-hint">ID unik pasien di sistem</span>
-                        <input type="text" id="patientId" class="form-input" placeholder="Cth: RM-2025-00142" />
+                        <!-- <span class="form-hint">ID unik pasien di sistem</span> -->
+                        <input type="text" id="patientId" class="form-input" placeholder="Cth: RM-2026-12310001" />
                     </div>
                 </div>
             </div>
@@ -559,7 +655,7 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label">Bangsal</label>
-                        <span class="form-hint">Unit bangsal perawatan</span>
+                        <!-- <span class="form-hint">Unit bangsal perawatan</span> -->
                         <select id="ward" class="form-input">
                             <option value="">— Pilih Bangsal —</option>
                             <option>ICU / Intensif</option><option>Bangsal Mawar (VIP)</option>
@@ -568,27 +664,18 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Jenis Layanan / Poli</label>
-                        <span class="form-hint">Unit layanan yang dikunjungi</span>
-                        <select id="serviceType" class="form-input">
-                            <option value="">— Pilih Layanan —</option>
-                            <option>Poli Gigi</option><option>Poli Anak</option><option>Poli Kandungan</option>
-                            <option>Poli Dalam</option><option>Poli Mata</option><option>Rawat Inap</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label class="form-label">Tanggal Mulai Rawat Inap</label>
-                        <span class="form-hint">Operasional &amp; klinis</span>
+                        <!-- <span class="form-hint">Operasional &amp; klinis</span> -->
                         <input type="date" id="admissionDate" class="form-input" onchange="calcLOS()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Tanggal Selesai Rawat Inap</label>
-                        <span class="form-hint">Operasional &amp; klinis</span>
+                        <!-- <span class="form-hint">Operasional &amp; klinis</span> -->
                         <input type="date" id="dischargeDate" class="form-input" onchange="calcLOS()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Durasi Inap (hari)</label>
-                        <span class="form-hint">Dihitung otomatis</span>
+                        <!-- <span class="form-hint">Dihitung otomatis</span> -->
                         <input type="number" id="lengthOfStay" class="form-input" placeholder="Otomatis" readonly />
                     </div>
                 </div>
@@ -598,27 +685,27 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label">Tanggal Kunjungan</label>
-                        <span class="form-hint">Untuk rawat jalan</span>
+                        <!-- <span class="form-hint">Untuk rawat jalan</span> -->
                         <input type="date" id="visitDate" class="form-input" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Waktu Registrasi</label>
-                        <span class="form-hint">Jam check-in pasien</span>
+                        <!-- <span class="form-hint">Jam check-in pasien</span> -->
                         <input type="time" id="registrationTime" class="form-input" onchange="calcWait()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Waktu Pemanggilan</label>
-                        <span class="form-hint">Jam pasien dipanggil dokter</span>
+                        <!-- <span class="form-hint">Jam pasien dipanggil dokter</span> -->
                         <input type="time" id="callTime" class="form-input" onchange="calcWait()" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Waktu Tunggu (menit)</label>
-                        <span class="form-hint">Dihitung otomatis</span>
+                        <!-- <span class="form-hint">Dihitung otomatis</span> -->
                         <input type="number" id="waitTime" class="form-input" placeholder="Otomatis" readonly />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Skor Kepuasan (0–5)</label>
-                        <span class="form-hint">Survei exit pasien</span>
+                        <!-- <span class="form-hint">Survei exit pasien</span> -->
                         <input type="number" id="satisfactionScore" step="0.1" min="0" max="5" class="form-input" placeholder="Cth: 4.5" />
                     </div>
                 </div>
@@ -632,12 +719,12 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label">Nama Dokter</label>
-                        <span class="form-hint">Nama dokter yang menangani</span>
-                        <input type="text" id="doctorName" class="form-input" placeholder="Cth: dr. Andi Wijaya, Sp.PD" />
+                        <!-- <span class="form-hint">Nama dokter yang menangani</span> -->
+                        <input type="text" id="doctorName" class="form-input" placeholder="Cth: Andi Wijaya" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Poli Dokter</label>
-                        <span class="form-hint">Poli tempat dokter bertugas</span>
+                        <!-- <span class="form-hint">Poli tempat dokter bertugas</span> -->
                         <select id="doctorPoli" class="form-input">
                             <option value="">— Pilih Poli —</option>
                             <option>Poli Gigi</option>
@@ -645,7 +732,7 @@
                             <option>Poli Kandungan</option>
                             <option>Poli Dalam</option>
                             <option>Poli Mata</option>
-                            <option>Rawat Inap</option>
+                            <!-- <option>Rawat Inap</option> -->
                         </select>
                     </div>
                 </div>
@@ -656,12 +743,12 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label">Tanggal Transaksi</label>
-                        <span class="form-hint">Tanggal pemasukan / pengeluaran</span>
+                        <!-- <span class="form-hint">Tanggal pemasukan / pengeluaran</span> -->
                         <input type="date" id="financeDate" class="form-input" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Jenis Transaksi</label>
-                        <span class="form-hint">Pemasukan atau pengeluaran</span>
+                        <!-- <span class="form-hint">Pemasukan atau pengeluaran</span> -->
                         <select id="financeType" class="form-input">
                             <option value="">— Pilih Jenis —</option>
                             <option value="Pemasukan">Pemasukan</option>
@@ -670,7 +757,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Unit / Kategori</label>
-                        <span class="form-hint">Sumber pendapatan atau kategori biaya</span>
+                        <!-- <span class="form-hint">Sumber pendapatan atau kategori biaya</span> -->
                         <select id="financeUnit" class="form-input">
                             <option value="">— Pilih Unit —</option>
                             <option value="Rawat Jalan">Rawat Jalan</option>
@@ -681,13 +768,8 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Jumlah (Rp)</label>
-                        <span class="form-hint">Nominal dalam Rupiah</span>
+                        <!-- <span class="form-hint">Nominal dalam Rupiah</span> -->
                         <input type="number" id="financeAmount" min="0" class="form-input" placeholder="Cth: 1500000" />
-                    </div>
-                    <div class="form-group span2">
-                        <label class="form-label">Keterangan</label>
-                        <span class="form-hint">Sumber atau tujuan — gaji, obat, rawat inap, dll</span>
-                        <input type="text" id="financeNote" class="form-input" placeholder="Cth: Pembayaran rawat inap, gaji dokter spesialis..." />
                     </div>
                 </div>
             </div>
@@ -698,13 +780,13 @@
         </form>
         <div class="table-card" style="margin-top:32px">
             <div class="table-header">
-                <div><div class="chart-title">Histori Data Tersimpan</div><div class="chart-subtitle" style="margin:0">Disimpan di browser lokal</div></div>
+                <div><div class="chart-title">Histori Data Tersimpan</div></div>
                 <button class="clear-btn" onclick="clearAll()">Hapus Semua</button>
             </div>
             <hr class="section-divider">
             <div style="overflow-x:auto">
             <table>
-                <thead><tr><th>#</th><th>Nama Pasien</th><th>No.RM</th><th>Bangsal</th><th>Poli/Layanan</th><th>Tgl Masuk</th><th>Tgl Keluar</th><th>Durasi</th><th>Tunggu</th><th>Kepuasan</th><th>Transaksi</th><th>Aksi</th></tr></thead>
+                <thead><tr><th>#</th><th>Nama Pasien</th><th>No.RM</th><th>Bangsal</th><th>Tgl Masuk</th><th>Tgl Keluar</th><th>Durasi</th><th>Poli/Layanan</th><th>Tunggu</th><th>Kepuasan</th><th>Dokter</th><th>Aksi</th></tr></thead>
                 <tbody id="historyTableBody"><tr><td colspan="12" class="history-empty">Belum ada data tersimpan.</td></tr></tbody>
             </table>
             </div>
