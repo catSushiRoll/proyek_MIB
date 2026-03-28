@@ -31,7 +31,7 @@ function requireAdmin(req, res, next) {
 // ── Login ──
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
-  if (username === "admin" && password === "pass6758") {
+  if (username === "admin" && password === "mib333") {
     req.session.isAdmin = true;
     res.json({ success: true });
   } else {
